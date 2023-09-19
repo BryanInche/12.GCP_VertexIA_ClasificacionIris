@@ -13,9 +13,12 @@ WORKDIR usr/src/app
 #Indica a pip que lea la lista de dependencias desde el archivo "requerimientos.txt" y las instale en el entorno del contenedor.
 RUN pip install -r requerimientos.txt
 
+# Expose puerto 8501 for Streamlit
+EXPOSE 8501
 
 #ENTRYPOINT: Es una instrucción de Docker que se utiliza para configurar el comando principal que se ejecutará cuando se inicie un contenedor a partir de la imagen.
-ENTRYPOINT ["streamlit", "run", "--server.runOnSave", "true", "app.py"]
+#ENTRYPOINT ["streamlit", "run", "--server.runOnSave", "true", "app.py"]
+ENTRYPOINT ["streamlit", "run"]
 #streamlit: es el comando principal que se ejecutará dentro del contenedor.
 #run":es un subcomando de Streamlit que se utiliza para ejecutar una aplicación Streamlit.
 #app.py: es el nombre del archivo Python que contiene tu aplicación Streamlit.
@@ -24,3 +27,4 @@ ENTRYPOINT ["streamlit", "run", "--server.runOnSave", "true", "app.py"]
 
 # --server esta configuración, cuando hagas cambios en tu código dentro del contenedor y los guardes, Streamlit debería automáticamente
 # reiniciar y reflejar esos cambios en la aplicación sin necesidad de detener y reiniciar manualmente el contenedor.
+CMD ["app.py"]
